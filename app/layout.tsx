@@ -4,6 +4,7 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const robotoMono = Roboto_Mono({ subsets: ["latin"], variable: "--font-roboto-mono" });
 export const metadata: Metadata = {
   metadataBase: new URL("https://auditmydenial.com"),
   title: {
