@@ -7,6 +7,14 @@ import { checkPaymentStatus } from "@/lib/check-payment";
 import { Download, CheckCircle, Shield } from "lucide-react";
 import { generateDossier } from "@/lib/dossier-factory";
 
+export const metadata = {
+  title: "Audit Unlocked | AuditMyDenial",
+  robots: {
+    index: false,
+    follow: false
+  }
+};
+
 function SuccessContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
