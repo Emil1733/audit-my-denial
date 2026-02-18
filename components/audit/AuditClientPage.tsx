@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LeadCaptureModal } from "@/components/LeadCaptureModal";
 import { Shield, AlertCircle, CheckCircle2, Lock, ArrowRight, Dna, FileSearch, Quote, FileCheck } from "lucide-react";
+import { Breadcrumbs } from "./Breadcrumbs";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -31,15 +32,42 @@ export default function AuditClientPage({ carrier, drug }: AuditClientPageProps)
   // JSON-LD Structured Data for SEO
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "MedicalWebPage",
-    "name": `${carrier} ${drug} Coverage Audit`,
-    "description": `Technical verification of ${carrier} insurance coverage policies for ${drug}.`,
-    "audience": {
-      "@type": "Patient",
-      "audienceType": "people with insurance denials"
-    },
-    "specialty": "Health Insurance Appeals",
-    "legalStatus": "HIPAA Compliant"
+    "@graph": [
+      {
+        "@type": "MedicalWebPage",
+        "name": `${carrier} ${drug} Coverage Audit`,
+        "description": `Technical verification of ${carrier} insurance coverage policies for ${drug}.`,
+        "audience": {
+          "@type": "Patient",
+          "audienceType": "people with insurance denials"
+        },
+        "specialty": "Health Insurance Appeals",
+        "legalStatus": "HIPAA Compliant"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://auditmydenial.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": carrier,
+            "item": `https://auditmydenial.com/audit/${carrier}`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": drug,
+            "item": `https://auditmydenial.com/audit/${carrier}/${drug}`
+          }
+        ]
+      }
+    ]
   };
 
   const [scanning, setScanning] = useState(true);
@@ -169,10 +197,16 @@ export default function AuditClientPage({ carrier, drug }: AuditClientPageProps)
       
       <motion.div 
         variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+        initial="visible"
         className="max-w-7xl mx-auto px-8 py-16"
       >
+        <Breadcrumbs 
+          items={[
+            { label: "Audit Center", href: "/#infrastructure" },
+            { label: carrier, href: `/audit/${carrier}` },
+            { label: drug }
+          ]} 
+        />
 
       {/* Precision Header */}
       <motion.div variants={itemVariants} className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16 px-4">
