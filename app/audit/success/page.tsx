@@ -20,14 +20,13 @@ export default function SuccessPage() {
        return;
     }
 
-    // Verify payment on backend (omitted for pure client demo speed, but normally vital)
-    // For MVP, we assume if they have the session_id, they paid (insecure, but fast for demo)
-    // A better way is to verify via an API call.
-    
-    setTimeout(() => setStatus("success"), 1500); // Fake verification delay
-    
-    // In production:
-    // verifyPayment(sessionId).then(valid => setStatus(valid ? 'success' : 'error'));
+    checkPaymentStatus(sessionId).then(valid => {
+      if (valid) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    }).catch(() => setStatus("error"));
 
   }, [sessionId, auditId]);
 
