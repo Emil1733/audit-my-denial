@@ -14,12 +14,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   // 2. Programmatic SEO Pages (The "Sniper" targets)
-  // In a real app, we'd fetch this list from the DB.
   const auditTargets = [
+    // Aetna Targets
     { carrier: 'Aetna', drug: 'Ozempic' },
     { carrier: 'Aetna', drug: 'Wegovy' },
+    { carrier: 'Aetna', drug: 'Mounjaro' },
+    { carrier: 'Aetna', drug: 'Zepbound' },
+    { carrier: 'Aetna', drug: 'Trulicity' },
+    
+    // UnitedHealthcare (UHC)
     { carrier: 'UnitedHealthcare', drug: 'Ozempic' },
+    { carrier: 'UnitedHealthcare', drug: 'Wegovy' },
+    { carrier: 'UnitedHealthcare', drug: 'Mounjaro' },
+    { carrier: 'UnitedHealthcare', drug: 'Zepbound' },
+    
+    // BCBS
+    { carrier: 'BCBS', drug: 'Ozempic' },
+    { carrier: 'BCBS', drug: 'Wegovy' },
+    { carrier: 'BCBS', drug: 'Mounjaro' },
+    { carrier: 'BCBS', drug: 'Humira' },
+    { carrier: 'BCBS', drug: 'Stelara' },
+    
+    // Cigna
+    { carrier: 'Cigna', drug: 'Ozempic' },
+    { carrier: 'Cigna', drug: 'Wegovy' },
+    { carrier: 'Cigna', drug: 'Enbrel' },
+    { carrier: 'Cigna', drug: 'Skyrizi' },
+    
+    // Humana
+    { carrier: 'Humana', drug: 'Ozempic' },
+    { carrier: 'Humana', drug: 'Wegovy' },
+    { carrier: 'Humana', drug: 'Tremfya' },
+    
+    // Specialty / General
     { carrier: 'Unknown', drug: 'MRI' },
+    { carrier: 'Unknown', drug: 'Radiology' },
+    { carrier: 'Medicare', drug: 'Ozempic' },
+    { carrier: 'Kaiser', drug: 'Ozempic' }
   ]
 
   const audits = auditTargets.map((target) => ({
