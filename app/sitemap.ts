@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   const audits = auditTargets.map((target) => ({
-    url: `${baseUrl}/audit/${encodeURIComponent(target.carrier)}/${encodeURIComponent(target.drug)}`,
+    url: `${baseUrl}/audit/${target.carrier}/${target.drug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
