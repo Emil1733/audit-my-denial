@@ -1,13 +1,11 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { checkPaymentStatus } from "@/lib/check-payment"; // We'll make this helper
+import { checkPaymentStatus } from "@/lib/check-payment";
 import { Download, CheckCircle, Shield } from "lucide-react";
 import { generateDossier } from "@/lib/dossier-factory";
 
-export default function SuccessPage() {
+function SuccessContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const sessionId = searchParams.get("session_id");
@@ -31,11 +29,6 @@ export default function SuccessPage() {
   }, [sessionId, auditId]);
 
   const handleDownload = async () => {
-    // Generate the PDF
-    // In a real app, we'd fetch the specific audit details again from the DB using the auditId
-    // to populate the PDF. For this demo, we'll hardcode/mock slightly or pass params.
-    // Ideally, the success page fetches the `auditResult` from the DB.
-    
     await generateDossier("Aetna", "Ozempic", { 
         score: 95, 
         evidence: ["Simulated Evidence match for Payment Demo"], 
@@ -109,5 +102,20 @@ export default function SuccessPage() {
             </div>
         </motion.div>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-[#020617] text-white">
+        <div className="text-center">
+            <div className="w-16 h-16 border-4 border-gold-500 border-t-transparent rounded-full animate-spin mx-auto mb-6"/>
+            <h2 className="text-2xl font-outfit font-bold">Initializing Secure Session...</h2>
+        </div>
+      </div>
+    }>
+      <SuccessContent />
+    </Suspense>
   );
 }
