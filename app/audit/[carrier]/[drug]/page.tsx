@@ -10,11 +10,22 @@ export async function generateMetadata({ params }: { params: { carrier: string; 
     openGraph: {
       title: `Failed ${carrier} coverage for ${drug}? We found the loophole.`,
       description: "See the exact clinical policy clause you violated and how to fix it."
+    },
+    alternates: {
+      canonical: `/audit/${params.carrier}/${params.drug}`
     }
   };
 }
 
-export default function AuditResultPage({ params }: { params: { carrier: string; drug: string } }) {
+export const metadata = {
+  title: "Audit Unlocked | AuditMyDenial",
+  robots: {
+    index: false,
+    follow: false
+  }
+};
+
+export default function SuccessPage({ params }: { params: { carrier: string; drug: string } }) {
   const carrier = decodeURIComponent(params.carrier);
   const drug = decodeURIComponent(params.drug);
   
