@@ -20,7 +20,7 @@ export default function SuccessPage() {
        return;
     }
 
-    checkPaymentStatus(sessionId).then(valid => {
+    checkPaymentStatus(sessionId).then((valid: boolean) => {
       if (valid) {
         setStatus("success");
       } else {
